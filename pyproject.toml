@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ecp205-lrfd"
+version = "0.1.0"
+description = "Steel member design to the Egyptian Code of Practice for Steel Construction, LRFD (ECP 205-LRFD 2008)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Ahmed Ali" }]
+keywords = [
+    "structural-engineering", "steel-design", "ecp", "ecp205", "lrfd",
+    "egyptian-code", "civil-engineering", "steel", "engineering",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/ahmedalisteel-star/ecp205-lrfd"
+Issues = "https://github.com/ahmedalisteel-star/ecp205-lrfd/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ecp205"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src"]
+addopts = "--doctest-modules -q"
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+# the package supports 3.9, so Optional[...] stays rather than X | None
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = [
+    "E741",   # ambiguous names: I, L and E are the code's own symbols
+    "UP045",  # Optional[...] kept for an unambiguous 3.9 dataclass
+]
