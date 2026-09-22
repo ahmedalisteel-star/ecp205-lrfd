@@ -68,6 +68,14 @@ from .core import (
     tcm2_to_MPa,
     tcm_to_kNm,
 )
+from .flexural_torsional import (
+    compression_ft,
+    compression_single_angle,
+    compression_tee,
+    fe_unsymmetric,
+    modified_slenderness,
+    table_4_1_exempt,
+)
 from .loads import COMBINATIONS, governing, load_combinations
 from .materials import (
     BOLT_AREAS,
@@ -152,6 +160,8 @@ __all__ = [
     # members
     "tension", "shear_lag_U", "block_shear",
     "compression", "Q_factor",
+    "compression_tee", "compression_single_angle", "compression_ft",
+    "fe_unsymmetric", "modified_slenderness", "table_4_1_exempt",
     "effective_width_unstiffened", "effective_width_stiffened",
     "Cb_ends", "Cb_quarter", "flexure_I", "shear_web",
     "Pe", "Cm_endmoments", "B1", "B2_drift", "B2_euler", "beam_column",

@@ -11,6 +11,13 @@ and the project adheres to [Semantic Versioning](https://semver.org/).
   `get_angle` and `search_angles`; `double_angle` for back-to-back pairs; and
   `tee_from` for tees cut from any I section. Each carries the principal axes,
   shear centre, J, Cw and polar radius of gyration that cl. 4.3 needs.
+- Flexural-torsional buckling, cl. 4.3 (`ecp205.flexural_torsional`):
+  `compression_tee` for tees and double angles (eq. 4.11-4.14, Table 4.1
+  exemption, cl. 4.4.1.3 modified slenderness on Fcry for double angles);
+  `compression_single_angle` (cl. 4.3.2, with the 40 % reduction or the
+  Chapter 7 route for gusset-connected angles); `compression_ft`, the general
+  method of cl. 4.3.3 (eq. 4.15-4.24, including the cubic eq. 4.20).
+- `modified_slenderness`, cl. 4.4.1.3 eq. 4.25/4.26.
 - `verify()` also checks the angle catalogue: tabulated A, centroid, Ix and Iy
   against the outline geometry, root and toe radii included.
 

@@ -73,6 +73,7 @@ Python 3.9+. No runtime dependencies.
 | 2 | section classification Tables 2.12a–d, shear lag, B1/B2 second-order, slenderness limits | `classification`, `members` |
 | 3 | tension — gross yielding, net fracture, block shear | `members` |
 | 4 | compression — flexural buckling, Q for slender elements, effective widths | `members` |
+| 4 | flexural-torsional buckling cl. 4.3 — tees and double angles (Table 4.1, eq. 4.11–4.14), single angles incl. the gusset alternatives, the general method eq. 4.15–4.24; modified slenderness eq. 4.25/4.26 | `flexural_torsional` |
 | 5 | flexure — compact and non-compact, all three Lb regimes, Cb, web shear | `members` |
 | 7 | beam-column interaction eq. 7.1a/7.1b | `members` |
 | 8 | bolts — shear, bearing, tension, combined, slip, prying, end plates, base plates | `connections` |
@@ -80,9 +81,10 @@ Python 3.9+. No runtime dependencies.
 | 10 | concentrated forces — flange bending, web yielding, web crippling | `connections` |
 | 14 | serviceability — deflection Table 14.1, drift Table 14.2 | `serviceability` |
 
-**Not covered** — use the code directly: plate girders (ch. 6), flexural-torsional
-buckling of tees and angles (cl. 4.3), laced and battened built-up members (cl. 4.4),
-fatigue (ch. 11), composite construction (ch. 12), cold-formed sections (ch. 13).
+**Not covered** — use the code directly: plate girders (ch. 6), the detailing rules
+for laced and battened members (cl. 4.4.1.1–4.4.1.2; only the modified slenderness of
+cl. 4.4.1.3 is implemented), fatigue (ch. 11), composite construction (ch. 12),
+cold-formed sections (ch. 13).
 
 ## Worked example — an 8 m floor beam
 
@@ -176,8 +178,14 @@ included, so the set is self-consistent. The catalogue's own A, centroid, Ix and
 Iy are kept as witnesses, and `verify()` checks them against the geometry the
 same way it checks the I sections.
 
-These are section properties only. The cl. 4.3 buckling check itself is not
-implemented yet.
+```python
+from ecp205 import compression_tee, compression_single_angle, compression_ft
+
+compression_tee(p, KLx=300, KLy=300, Fy=2.4, Pu=15,
+                lz=100, connectors="battens")          # cl. 4.3.1 + eq. 4.26
+compression_single_angle(a, KL=200, Fy=2.4, gusset="reduce")   # cl. 4.3.2
+compression_ft(get_angle("L 100x75x8"), 200, 200, 200, 2.4)   # cl. 4.3.3, eq. 4.20
+```
 
 ## Custom and built-up sections
 
