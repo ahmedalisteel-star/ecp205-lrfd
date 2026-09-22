@@ -153,7 +153,7 @@ def test_angle_rejects_bad_geometry():
 
 # ------------------------------------------------------------ catalogue
 def test_catalogue_size():
-    assert len(EQUAL_ANGLES) == 58
+    assert len(EQUAL_ANGLES) == 59
     assert len(UNEQUAL_ANGLES) == 42
 
 
@@ -271,3 +271,11 @@ def test_double_angle_validation():
         double_angle("L 100x75x8", legs="sideways")
     with pytest.raises(ValueError, match="gap"):
         DoubleAngle(get_angle("L 100x75x8"), gap=-1)
+
+
+def test_l70x70x6_centroid_misprint():
+    """The handbook's e = 1.83 is contradicted by its own Wel: a - Ix/Wel = 1.92.
+    The geometry gives 1.93, so the row is kept with the corrected witness."""
+    a = get_angle("L 70x70x6")
+    assert a.ex == pytest.approx(7 - 36.9 / 7.27, abs=0.01)
+    assert a.Ix == pytest.approx(36.9, rel=0.005)

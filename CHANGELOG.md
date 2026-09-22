@@ -7,7 +7,7 @@ and the project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-- `ecp205.open_sections`: 100 EN 10056-1 angles (58 equal, 42 unequal) with
+- `ecp205.open_sections`: 101 EN 10056-1 angles (59 equal, 42 unequal) with
   `get_angle` and `search_angles`; `double_angle` for back-to-back pairs; and
   `tee_from` for tees cut from any I section. Each carries the principal axes,
   shear centre, J, Cw and polar radius of gyration that cl. 4.3 needs.

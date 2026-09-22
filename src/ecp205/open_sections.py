@@ -21,6 +21,17 @@ A, centroid, Ix and Iy are kept in the table only as witnesses:
 :func:`ecp205.sections.verify` re-derives them from the geometry and reports any
 disagreement over 3 %, so a typo in a dimension cannot pass silently.
 
+Sizes not in the catalogue
+--------------------------
+EN 10056-1 lists these sizes, but they are left out because the source handbook
+has no complete tabulated properties to check them against. Use :class:`Angle`
+with the dimensions from your supplier's table if you need one:
+
+- equal: L 20x20x3, L 30x30x3, L 30x30x4, L 35x35x4, L 45x45x4.5, L 45x45x6,
+  L 65x65x7, L 65x65x9, L 70x70x7, L 160x160x15, L 180x180x16, L 180x180x18
+- unequal: L 40x25x4, L 45x30x4, L 50x30x5, L 60x40x5, L 60x40x6, L 70x50x6,
+  L 80x40x6
+
 J and Cw use the usual thin-walled open-section expressions (Seaburg and
 Carter, *Torsional Analysis of Structural Steel Members*, 1997, which gives
 section properties only - no design provisions are taken from it).
@@ -51,7 +62,7 @@ __all__ = ["Angle", "Tee", "DoubleAngle", "EQUAL_ANGLES", "UNEQUAL_ANGLES",
 
 
 # ---------------------------------------------------------------- catalogue
-# EN 10056-1 equal angles. Dimensions in cm.
+# EN 10056-1 equal angles (59). Dimensions in cm.
 #                      a     t     r1    r2    | witnesses: A    e     Ix
 # e is the centroid distance from the back of either leg; Ix is about the
 # centroidal axis parallel to a leg (Ix = Iy).
@@ -73,6 +84,10 @@ EQUAL_ANGLES = {
     "L 65x65x6":      (6.5, 0.6, 0.9, 0.45, 7.53, 1.81, 29.2),
     "L 65x65x8":      (6.5, 0.8, 0.9, 0.45, 9.76, 1.88, 37.5),
     "L 65x65x10":     (6.5, 1, 0.9, 0.45, 12, 1.96, 45.1),
+    # L 70x70x6: the handbook prints e = 1.83, but its own Wel = 7.27 gives
+    # e = a - Ix/Wel = 7 - 36.9/7.27 = 1.92, and A, Ix and iy agree with the
+    # geometry. 1.83 is a misprint; the witness below is 1.93.
+    "L 70x70x6":      (7, 0.6, 0.9, 0.45, 8.13, 1.93, 36.9),
     "L 70x70x8":      (7, 0.8, 0.9, 0.45, 10.6, 2.01, 47.5),
     "L 70x70x10":     (7, 1, 0.9, 0.45, 13.1, 2.09, 57.2),
     "L 75x75x5":      (7.5, 0.5, 0.9, 0.45, 7.36, 1.99, 38.5),
@@ -116,7 +131,7 @@ EQUAL_ANGLES = {
     "L 200x200x24":   (20, 2.4, 1.8, 0.9, 90.8, 5.84, 3330),
 }
 
-# EN 10056-1 unequal angles, long leg ``a`` first. Dimensions in cm.
+# EN 10056-1 unequal angles (42), long leg ``a`` first. Dimensions in cm.
 #                      a     b     t     r1    r2    | witnesses: A  ea  eb  Ix  Iy
 # ea is the centroid distance measured along the long leg (from the back of the
 # short leg), eb along the short leg. Ix is about the centroidal axis parallel to

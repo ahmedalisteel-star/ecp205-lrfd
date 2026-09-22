@@ -157,7 +157,7 @@ supplier's table before a section goes on a drawing.
 
 ### Angles, double angles and tees
 
-100 EN 10056-1 angles (58 equal, 42 unequal), double angles back to back, and tees
+101 EN 10056-1 angles (59 equal, 42 unequal), double angles back to back, and tees
 cut from any I section — the sections cl. 4.3 needs. They carry the geometry
 flexural-torsional buckling uses: principal axes (Iu, Iv, α), the shear centre
 (x0, y0 and u0, v0), J, Cw and r̄o².
