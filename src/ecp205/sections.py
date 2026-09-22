@@ -1,5 +1,6 @@
 """Cross-sections: the :class:`ISection` geometry object and a catalogue of the
-European hot-rolled profiles (IPE, HEA, HEB) used in Egyptian practice.
+European hot-rolled profiles (IPE, HEA, HEB) used in Egyptian practice. Angles,
+double angles and tees are in :mod:`ecp205.open_sections`.
 
 Catalogue values are **nominal**. Before a section goes on a drawing, confirm it
 against the mill certificate or the supplier's table - rolling tolerances and
@@ -271,7 +272,9 @@ def verify(tol: float = 0.03) -> list[str]:
     """Re-derive A, Ix and Zx from the plate geometry and report disagreements.
 
     Agreement is normally within about 1 %, so anything reported here is a
-    suspect table entry rather than rolling tolerance.
+    suspect table entry rather than rolling tolerance. The angle catalogue is
+    checked the same way, from its own outline geometry
+    (:func:`ecp205.open_sections.verify_angles`).
 
     >>> verify()
     []
@@ -292,4 +295,5 @@ def verify(tol: float = 0.03) -> list[str]:
             if err > tol:
                 bad.append(f"{name:<9s} {label:<3s} table={given:<10.4g} "
                            f"geometry={calc[label]:<10.4g} ({err * 100:4.1f}% off)")
-    return bad
+    from .open_sections import verify_angles  # imported here: it imports this module
+    return bad + verify_angles(tol)

@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- `ecp205.open_sections`: 100 EN 10056-1 angles (58 equal, 42 unequal) with
+  `get_angle` and `search_angles`; `double_angle` for back-to-back pairs; and
+  `tee_from` for tees cut from any I section. Each carries the principal axes,
+  shear centre, J, Cw and polar radius of gyration that cl. 4.3 needs.
+- `verify()` also checks the angle catalogue: tabulated A, centroid, Ix and Iy
+  against the outline geometry, root and toe radii included.
+
 ## [0.1.0] - 2026-09-21
 
 First release.

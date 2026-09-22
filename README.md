@@ -155,6 +155,30 @@ pass silently. It returns `[]`.
 **Catalogue values are nominal.** Confirm against the mill certificate or the
 supplier's table before a section goes on a drawing.
 
+### Angles, double angles and tees
+
+100 EN 10056-1 angles (58 equal, 42 unequal), double angles back to back, and tees
+cut from any I section — the sections cl. 4.3 needs. They carry the geometry
+flexural-torsional buckling uses: principal axes (Iu, Iv, α), the shear centre
+(x0, y0 and u0, v0), J, Cw and r̄o².
+
+```python
+from ecp205 import get_angle, double_angle, tee_from, search_angles
+
+a = get_angle("L 100x100x10")     # a.rv = 1.95, a.Iu = 280, a.Iv = 73.0
+p = double_angle("L 100x75x8", gap=1.0, legs="long")
+t = tee_from("IPE 400")           # "1/2 IPE 400", y0 = -3.85
+search_angles(A_min=12, rv_min=1.9)[0]["name"]
+```
+
+Every angle property is computed from the outline with the root and toe radii
+included, so the set is self-consistent. The catalogue's own A, centroid, Ix and
+Iy are kept as witnesses, and `verify()` checks them against the geometry the
+same way it checks the I sections.
+
+These are section properties only. The cl. 4.3 buckling check itself is not
+implemented yet.
+
 ## Custom and built-up sections
 
 ```python

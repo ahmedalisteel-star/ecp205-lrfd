@@ -97,6 +97,18 @@ from .members import (
     shear_web,
     tension,
 )
+from .open_sections import (
+    ANGLES,
+    EQUAL_ANGLES,
+    UNEQUAL_ANGLES,
+    Angle,
+    DoubleAngle,
+    Tee,
+    double_angle,
+    get_angle,
+    search_angles,
+    tee_from,
+)
 from .sections import (
     CATALOGUE,
     HEA,
@@ -132,6 +144,8 @@ __all__ = [
     # sections
     "ISection", "get", "search", "weight", "verify",
     "CATALOGUE", "IPE", "HEA", "HEB",
+    "Angle", "Tee", "DoubleAngle", "get_angle", "search_angles", "tee_from",
+    "double_angle", "ANGLES", "EQUAL_ANGLES", "UNEQUAL_ANGLES",
     # classification
     "classify", "web_limits", "flange_limits", "internal_flange_limits",
     "angle_limit", "tee_limit", "tube_limits",
